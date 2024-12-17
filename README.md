@@ -1,0 +1,1 @@
+_utils.py collects some utility functions which might have later uses. All other files import _utils, some require numpy. Each solution expects the respective puzzle input as a txt file named "XXDec.txt" (XX = day).
