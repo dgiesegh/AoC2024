@@ -47,7 +47,7 @@ def dijkstra(graph, start_node_id, end_node_id, max_dist=1000000, dist_func=lamb
     while len(queue) != 0:
         queue.sort(key=lambda node_id: graph.nodes[node_id].properties["distance"])
         curr_node_id = queue.pop(0)
-        print("Testing", curr_node_id)
+        #print("Testing", curr_node_id)
         if curr_node_id == end_node_id:
             return graph.nodes[curr_node_id].properties["distance"]
         neighbours = graph.get_neighbours(curr_node_id)
