@@ -38,24 +38,23 @@ class Node:
     def add_connection(self, node):
         self.connections.append(node)
 
-def dijkstra(graph, start_node_id, end_node_id, max_dist=1000000, dist_func=lambda n1,n2: 1):
+def dijkstra(graph, start_node_id, end_node_id, max_dist=1000000, dist_func=lambda n1,n2: 1, d_label="distance", p_label="prev"):
     for node in graph.nodes.values():
-        node.properties["distance"] = max_dist
-        node.properties["prev"] = None
-    graph.nodes[start_node_id].properties["distance"] = 0
+        node.properties[d_label] = max_dist
+        node.properties[p_label] = None
+    graph.nodes[start_node_id].properties[d_label] = 0
     queue = list(graph.nodes.keys())
     while len(queue) != 0:
-        queue.sort(key=lambda node_id: graph.nodes[node_id].properties["distance"])
+        queue.sort(key=lambda node_id: graph.nodes[node_id].properties[d_label])
         curr_node_id = queue.pop(0)
-        #print("Testing", curr_node_id)
         if curr_node_id == end_node_id:
-            return graph.nodes[curr_node_id].properties["distance"]
+            return graph.nodes[curr_node_id].properties[d_label]
         neighbours = graph.get_neighbours(curr_node_id)
         for n_id in neighbours:
-            new_dist = dist_func(curr_node_id, n_id) + graph.nodes[curr_node_id].properties["distance"]
-            if new_dist < graph.nodes[n_id].properties["distance"]:
-                graph.nodes[n_id].properties["distance"] = new_dist
-                graph.nodes[n_id].properties["prev"] = curr_node_id
+            new_dist = dist_func(curr_node_id, n_id) + graph.nodes[curr_node_id].properties[d_label]
+            if new_dist < graph.nodes[n_id].properties[d_label]:
+                graph.nodes[n_id].properties[d_label] = new_dist
+                graph.nodes[n_id].properties[p_label] = curr_node_id
                 
 
 # read lines of txt file and strip \n's

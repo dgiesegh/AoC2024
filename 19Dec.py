@@ -38,7 +38,6 @@ print("Q1 answer:", possible)
 score = 0
 hashmap = {}
 for design in designs:
-    print("Starting design", design)
     score += dfs2(design, patterns, 0, hashmap)
 
 print("Q2 anwer:", score)
