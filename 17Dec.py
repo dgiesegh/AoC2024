@@ -66,15 +66,12 @@ for res in program[::-1]:
     newAs = []
     for ind in range(len(possibleAs)):
         regA = possibleAs[ind]
-        updatedA = False
         for i in range(8):
             a = 8 * regA + i
-            for b in range(8):
-                if a % 8 == b:
-                    if (b ^ int(a / 2**(b ^ 7))) % 8 == res:
-                        updatedA = True
-                        newAs.append(a)
-    possibleAs = [a for a in newAs if a > 0]
+            b = a % 8
+            if (b ^ int(a / 2**(b ^ 7))) % 8 == res:
+                newAs.append(a)
+    possibleAs = [a for a in newAs]
     if len(possibleAs) == 0:
         print("Terminating: no valid values for regA left")
         break
